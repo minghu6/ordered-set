@@ -1,14 +1,13 @@
 from setuptools import setup
 
 setup(
-    name="ordered-set",
-    version = '2.0.1',
-    maintainer='Luminoso Technologies, Inc.',
-    maintainer_email='rob@luminoso.com',
+    name="ordered-set-minghu6",
+    version = '3.0.1',
     license = "MIT-LICENSE",
-    url = 'http://github.com/LuminosoInsight/ordered-set',
+    url = 'http://github.com/minghu6/ordered-set',
     platforms = ["any"],
-    description = "A MutableSet that remembers its order, so that every entry has an index.",
+    description = "A Fork from LuminosoInsight/ordered-set, "
+                  "according to #Pull requests 22 .",
     py_modules=['ordered_set'],
     package_data={'': ['MIT-LICENSE']},
     include_package_data=True,
