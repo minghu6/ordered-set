@@ -8,7 +8,7 @@ from ordered_set_adapter import OrderedSetAdapter
 
 def gt_test():
     set1 = OrderedSetAdapter([3, 5, 2])
-    set2 = {3, 5, 2, 1}
+    set2 = set([3, 5, 2, 1])
     set3 = OrderedSetAdapter([3, 2, 5, 1])
 
     assert not set1 > set2
