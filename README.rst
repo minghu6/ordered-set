@@ -6,6 +6,9 @@
 .. image:: https://travis-ci.org/minghu6/ordered-set.svg
    :target: https://travis-ci.org/minghu6/ordered-set
 
+.. image:: https://coveralls.io/repos/github/minghu6/ordered-set/badge.svg?branch=master
+   :target: https://coveralls.io/github/minghu6/ordered-set?branch=master
+
 .. image:: https://landscape.io/github/minghu6/ordered-set/master/landscape.svg?style=flat
    :target: https://landscape.io/github/minghu6/ordered-set/master
    :alt: Code Health

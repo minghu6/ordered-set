@@ -13,7 +13,7 @@ notifications:
   on_failure: always
   on_start: never
 install:
-  - pip install nose coverage
+  - pip install coverage
   - pip install coveralls
 script:
   - python setup.py nosetests --with-coverage
