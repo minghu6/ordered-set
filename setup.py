@@ -1,4 +1,10 @@
+import os
+
 from setuptools import setup
+
+with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
+	README = readme.read()
+os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name="ordered-set-minghu6",
@@ -8,7 +14,7 @@ setup(
     platforms = ["any"],
     description = "A Fork from LuminosoInsight/ordered-set, "
                   "according to #Pull requests 22 .",
-    long_description= open('README.rst').read(),
+    long_description= README,
     py_modules=['ordered_set'],
     package_data={'': ['MIT-LICENSE']},
     include_package_data=True,
