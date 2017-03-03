@@ -8,15 +8,11 @@ python:
 - '3.5'
 - '3.6'
 sudo: false
-notifications:
-  on_success: change
-  on_failure: always
-  on_start: never
 install:
   - pip install coveralls
 script:
   - nosetests --with-coverage --cover-package=ordered_set,ordered_set_adapter
-after_sucess:
+after_success:
   coveralls
 deploy:
   provider: pypi
@@ -26,5 +22,6 @@ deploy:
   on:
     tags: true
     all_branches: true
-    distributions: sdist bdist_wheel
     repo: minghu6/ordered-set
+
+  distributions: sdist bdist_wheel
