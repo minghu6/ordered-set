@@ -8,6 +8,7 @@ setup(
     platforms = ["any"],
     description = "A Fork from LuminosoInsight/ordered-set, "
                   "according to #Pull requests 22 .",
+    long_description= open('README.rst').read(),
     py_modules=['ordered_set'],
     package_data={'': ['MIT-LICENSE']},
     include_package_data=True,
