@@ -8,7 +8,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name="ordered-set-minghu6",
-    version = '3.0.1',
+    version = '3.0.1rc1',
     license = "MIT-LICENSE",
     url = 'http://github.com/minghu6/ordered-set',
     platforms = ["any"],
