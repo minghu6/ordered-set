@@ -15,7 +15,7 @@ notifications:
 install:
   - pip install coveralls
 script:
-  - coverage run  --source ordered_set,ordered_set_adapter setup.py test
+  - nosetests --with-coverage --cover-package=ordered_set,ordered_set_adapter
 after_sucess:
   coveralls
 deploy:
