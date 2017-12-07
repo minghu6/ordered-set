@@ -45,23 +45,25 @@ def is_iterable(obj):
 
 
 def _acquire_ordered_set(f):
-
     def wrapper(this, other):
-
+        
         if not isinstance(other, OrderedSet):
             raise TypeError('both of operation object are expected OrderedSet')
         else:
             return f(this, other)
-
+    
     return wrapper
+
 
 class UnionError(BaseException):
     def __str__(self):
         return 'two set can not union'
 
+
 class DifferenceError(BaseException):
     def __str__(self):
         return 'can not compare diffrence of two set'
+
 
 class SymmetricDifferenceError(BaseException):
     def __str__(self):
@@ -73,25 +75,26 @@ class OrderedSet(collections.MutableSet):
     An OrderedSet is a custom MutableSet that remembers its order, so that
     every entry has an index that can be looked up.
     """
+    
     def __init__(self, iterable=None):
         self._items = []
         self._map = {}
         if iterable is not None:
             self.update(iterable)
-
+    
     def get_items(self):
         return self._items.copy()
-
+    
     items = property(get_items)
-
+    
     def get_map(self):
         return self._map.copy()
-
+    
     map = property(get_map)
-
+    
     def __len__(self):
         return len(self._items)
-
+    
     def __getitem__(self, index):
         """
         Get the item at a given index.
@@ -116,11 +119,11 @@ class OrderedSet(collections.MutableSet):
             return OrderedSet([self._items[i] for i in index])
         else:
             raise TypeError("Don't know how to index an OrderedSet by %r" %
-                    index)
-
+                            index)
+    
     def copy(self):
         return OrderedSet(self)
-
+    
     def __getstate__(self):
         if len(self) == 0:
             # The state can't be an empty list.
@@ -132,16 +135,16 @@ class OrderedSet(collections.MutableSet):
             return (None,)
         else:
             return list(self)
-
+    
     def __setstate__(self, state):
         if state == (None,):
             self.__init__([])
         else:
             self.__init__(state)
-
+    
     def __contains__(self, key):
         return key in self._map
-
+    
     def add(self, key):
         """
         Add `key` as an item to this OrderedSet, then return its index.
@@ -153,8 +156,9 @@ class OrderedSet(collections.MutableSet):
             self._map[key] = len(self._items)
             self._items.append(key)
         return self._map[key]
+    
     append = add
-
+    
     def update(self, sequence):
         """
         Update the set with the given iterable sequence, then return the index
@@ -167,7 +171,7 @@ class OrderedSet(collections.MutableSet):
         except TypeError:
             raise ValueError('Argument needs to be an iterable, got %s' % type(sequence))
         return item_index
-
+    
     def index(self, key):
         """
         Get the index of a given entry, raising an IndexError if it's not
@@ -179,7 +183,7 @@ class OrderedSet(collections.MutableSet):
         if is_iterable(key):
             return [self.index(subkey) for subkey in key]
         return self._map[key]
-
+    
     def pop(self):
         """
         Remove and return the last element from the set.
@@ -188,12 +192,12 @@ class OrderedSet(collections.MutableSet):
         """
         if not self._items:
             raise KeyError('Set is empty')
-
+        
         elem = self._items[-1]
         del self._items[-1]
         del self._map[elem]
         return elem
-
+    
     def discard(self, key):
         """
         Remove an element.  Do not raise an exception if absent.
@@ -208,45 +212,44 @@ class OrderedSet(collections.MutableSet):
             for k, v in self._map.items():
                 if v >= i:
                     self._map[k] = v - 1
-
+    
     def clear(self):
         """
         Remove all items from this OrderedSet.
         """
         del self._items[:]
         self._map.clear()
-
+    
     def __iter__(self):
         return iter(self._items)
-
+    
     def __reversed__(self):
         return reversed(self._items)
-
+    
     def __repr__(self):
         if not self:
             return '%s()' % (self.__class__.__name__,)
         return '%s(%r)' % (self.__class__.__name__, list(self))
-
+    
     def __eq__(self, other):
         if isinstance(other, OrderedSet):
             return len(self) == len(other) and self._items == other._items
         else:
             # OrderedSet cann't compared with set
             return False
-
-
+    
     @_acquire_ordered_set
     def __gt__(self, other):
-
+        
         if len(self._items) <= len(other._items):
             return False
         else:
             for this_item, other_item in zip(self._items, other._items):
                 if this_item != other_item:
                     return False
-
+            
             return True
-
+    
     @_acquire_ordered_set
     def __lt__(self, other):
         if len(self._items) >= len(other._items):
@@ -255,29 +258,29 @@ class OrderedSet(collections.MutableSet):
             for this_item, other_item in zip(self._items, other._items):
                 if this_item != other_item:
                     return False
-
+            
             return True
-
+    
     @_acquire_ordered_set
     def __ge__(self, other):
         if self.__eq__(other) or self.__gt__(other):
             return True
         else:
             return False
-
+    
     @_acquire_ordered_set
     def __le__(self, other):
         if self.__eq__(other) or self.__lt__(other):
             return True
         else:
             return False
-
+    
     def issubset(self, other):
         return self.__le__(other)
-
+    
     def issuperset(self, other):
         return self.__ge__(other)
-
+    
     @_acquire_ordered_set
     def __and__(self, other):
         res = OrderedSet()
@@ -286,28 +289,27 @@ class OrderedSet(collections.MutableSet):
                 break
             else:
                 res.add(this_item)
-
+        
         return res
-
+    
     def intersection(self, *others):
         res = self.__and__(others[0])
         for other in others[1:]:
             res = res.__and__(other)
-
+        
         return res
-
+    
     def intersection_update(self, *others):
         res = self.intersection(*others)
         self.clear()
         self.update(res)
-
-
+    
     def isdisjoint(self, other):
         if len(self.intersection(other)) == 0:
             return True
         else:
             return False
-
+    
     @_acquire_ordered_set
     def __or__(self, other):
         if self.issubset(other):
@@ -316,36 +318,36 @@ class OrderedSet(collections.MutableSet):
             return self.copy()
         else:
             raise UnionError
-
+    
     @_acquire_ordered_set
     def __sub__(self, other):
         if self.issubset(other):
             return OrderedSet()
         else:
             raise DifferenceError
-
+    
     def __iand__(self, other):
         self = self.__and__(other)
         return self
-
+    
     def __ior__(self, other):
         self = self.__or__(other)
         return self
-
+    
     def __rand__(self, other):
         return other.__and__(self)
-
+    
     def __ror__(self, other):
         return other.__or__(self)
-
+    
     def __xor__(self, other):
         raise SymmetricDifferenceError
-
+    
     def __ixor__(self, other):
         raise SymmetricDifferenceError
-
+    
     def __rxor__(self, other):
         raise SymmetricDifferenceError
-
+    
     def __ne__(self, other):
         return not self.__eq__(other)

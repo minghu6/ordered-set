@@ -124,6 +124,7 @@ def test_le():
     assert not set1 <= set3
     assert set1 <= set4
 
+
 def test_ge():
     set1 = OrderedSet([3, 5, 2])
     set2 = OrderedSet([3, 5, 2, 1])
@@ -134,6 +135,7 @@ def test_ge():
     assert not set3 >= set1
     assert set4 >= set1
 
+
 def test_lt():
     set1 = OrderedSet([3, 5, 2])
     set2 = OrderedSet([3, 5, 2, 1])
@@ -142,6 +144,7 @@ def test_lt():
     assert set1 < set2
     assert not set3 < set2
 
+
 def test_gt():
     set1 = OrderedSet([3, 5, 2])
     set2 = OrderedSet([3, 5, 2, 1])
@@ -149,6 +152,7 @@ def test_gt():
 
     assert set2 > set1
     assert not set3 > set1
+
 
 def test_and():
     set1 = OrderedSet([3, 5, 2])
@@ -160,6 +164,7 @@ def test_and():
     assert set3 & set1 == OrderedSet([3])
     assert set4 & set1 == OrderedSet([3, 5, 2])
 
+
 def test_sub():
     set1 = OrderedSet([3, 5, 2])
     set2 = OrderedSet([3, 5, 2, 1])
@@ -167,6 +172,7 @@ def test_sub():
 
     assert set1 - set2 == OrderedSet()
     assert set3 - set1 == OrderedSet()
+
 
 def test_intersection():
     set1 = OrderedSet([3, 5,])
