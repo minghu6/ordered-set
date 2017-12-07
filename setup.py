@@ -13,7 +13,7 @@ setup(
     url = 'http://github.com/minghu6/ordered-set',
     platforms = ["any"],
     description = "A Fork from LuminosoInsight/ordered-set, "
-                  "according to #Pull requests 22 .",
+                  "according to Pull requests #22 .",
     long_description= README,
     py_modules=['ordered_set'],
     package_data={'': ['MIT-LICENSE']},
